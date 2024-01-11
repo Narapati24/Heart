@@ -1,8 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:heart/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   const Register({super.key});
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +64,7 @@ class Register extends StatelessWidget {
                       child: SizedBox(
                         height: 40,
                         child: TextFormField(
+                          controller: _firstNameController,
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(fontSize: 18)),
                           textAlignVertical: TextAlignVertical.bottom,
@@ -58,6 +82,7 @@ class Register extends StatelessWidget {
                       child: SizedBox(
                         height: 40,
                         child: TextFormField(
+                          controller: _lastNameController,
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(fontSize: 18)),
                           textAlignVertical: TextAlignVertical.bottom,
@@ -82,6 +107,7 @@ class Register extends StatelessWidget {
                 SizedBox(
                   height: 40,
                   child: TextFormField(
+                    controller: _emailController,
                     style: GoogleFonts.poppins(
                         textStyle: const TextStyle(fontSize: 18)),
                     textAlignVertical: TextAlignVertical.bottom,
@@ -103,6 +129,7 @@ class Register extends StatelessWidget {
                 SizedBox(
                   height: 40,
                   child: TextFormField(
+                    controller: _passwordController,
                     obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
@@ -130,7 +157,7 @@ class Register extends StatelessWidget {
                         backgroundColor: const MaterialStatePropertyAll(
                             Color.fromRGBO(71, 73, 160, 1)),
                       ),
-                      onPressed: () {},
+                      onPressed: _register,
                       child: const Text(
                         "Sign Up",
                         style: TextStyle(color: Colors.white, fontSize: 18),
@@ -163,5 +190,21 @@ class Register extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _register() async {
+    String firstName = _firstNameController.text;
+    String lastName = _lastNameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print("User is successfully created");
+      Navigator.of(context).pop();
+    } else {
+      print("Some error happend");
+    }
   }
 }

@@ -1,10 +1,29 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heart/screens/register.dart';
+import 'package:heart/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +59,7 @@ class Login extends StatelessWidget {
                 SizedBox(
                   height: 40,
                   child: TextFormField(
+                      controller: _emailController,
                       style: GoogleFonts.poppins(
                           textStyle: const TextStyle(fontSize: 18)),
                       textAlignVertical: TextAlignVertical.bottom,
@@ -64,6 +84,7 @@ class Login extends StatelessWidget {
                 SizedBox(
                   height: 40,
                   child: TextFormField(
+                    controller: _passwordController,
                     obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
@@ -92,7 +113,7 @@ class Login extends StatelessWidget {
                         backgroundColor: const MaterialStatePropertyAll(
                             Color.fromRGBO(71, 73, 160, 1)),
                       ),
-                      onPressed: () {},
+                      onPressed: _login,
                       child: const Text(
                         "Login",
                         style: TextStyle(color: Colors.white, fontSize: 18),
@@ -146,5 +167,18 @@ class Login extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _login() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signInWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      print("User is successfully login");
+    } else {
+      print("Some error happend");
+    }
   }
 }

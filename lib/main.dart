@@ -1,9 +1,17 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:heart/screens/login.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyDmadXQE5wy3dHqN_hSVDZRxP_Xy9vUhFc",
+          appId: "1:355023854653:android:0a269a669a09b5b6e41e54",
+          messagingSenderId: "355023854653",
+          projectId: "heart-d8c03"));
   runApp(const HeartApp());
 }
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "355023854653",
+    "project_id": "heart-d8c03",
+    "storage_bucket": "heart-d8c03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355023854653:android:0a269a669a09b5b6e41e54",
+        "android_client_info": {
+          "package_name": "histeriacode.heart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8e3lieO4kfdqGGo71qbHvNmLjc6cO0rI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
