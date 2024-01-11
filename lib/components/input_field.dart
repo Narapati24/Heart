@@ -6,7 +6,7 @@ class InputField extends StatelessWidget {
   String? label, placeholder;
   bool? obscure, isDense;
   String? Function(String?)? validator;
-  double? height;
+  double? height, width;
   InputField(
       {super.key,
       this.label = '',
@@ -14,6 +14,7 @@ class InputField extends StatelessWidget {
       this.obscure = false,
       this.validator,
       this.height = 40,
+      this.width = double.infinity,
       this.isDense = false});
 
   @override
@@ -30,13 +31,17 @@ class InputField extends StatelessWidget {
           ),
         if (label != '') const SizedBox(height: 10),
         SizedBox(
+          width: width,
           height: height,
           child: TextFormField(
             obscureText: obscure! ? true : false,
             autocorrect: obscure! && false,
             enableSuggestions: obscure! && false,
-            style:
-                GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 18)),
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                fontSize: 18,
+              ),
+            ),
             textAlignVertical: TextAlignVertical.bottom,
             decoration: InputDecoration(
               hintText: placeholder,
@@ -44,7 +49,8 @@ class InputField extends StatelessWidget {
               border: !isDense!
                   ? OutlineInputBorder(
                       borderSide: const BorderSide(
-                          color: Color.fromRGBO(221, 229, 233, 1)),
+                        color: Color.fromRGBO(221, 229, 233, 1),
+                      ),
                       borderRadius: BorderRadius.circular(8),
                     )
                   : null,

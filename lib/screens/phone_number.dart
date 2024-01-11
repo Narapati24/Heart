@@ -1,5 +1,8 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:heart/components/button.dart';
 import 'package:heart/components/input_field.dart';
+import 'package:heart/variable/const.dart';
 
 class PhoneNumber extends StatefulWidget {
   const PhoneNumber({super.key});
@@ -18,43 +21,81 @@ class _PhoneNumberState extends State<PhoneNumber> {
           // onTap: () => Navigator.of(context).pop(),
         ),
       ),
-      body: Column(children: [
-        const ListTile(
-          title: Text('Enter your Phone Number'),
-          subtitle: Text('Insert your Phone Number to Continue'),
-        ),
-        const SizedBox(height: 10),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            children: [
-              const SizedBox(
-                child: DropdownMenu(
-                  inputDecorationTheme: InputDecorationTheme(
-                    isDense: true,
-                    contentPadding: EdgeInsets.all(30),
-                  ),
-                  trailingIcon: Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    size: 40,
-                  ),
-                  hintText: '+62',
-                  dropdownMenuEntries: [
-                    DropdownMenuEntry(value: 1, label: 'label')
-                  ],
-                ),
-              ),
-              Expanded(
-                child: InputField(
-                  placeholder: 'Phone Number',
-                  height: 50,
-                  isDense: true,
-                ),
-              ),
-            ],
+      body: Column(
+        children: [
+          const ListTile(
+            title: Text('Enter your Phone Number'),
+            subtitle: Text('Insert your Phone Number to Continue'),
           ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  flex: 0,
+                  child: Container(
+                    width: 100,
+                    height: 55,
+                    decoration: const BoxDecoration(
+                      border: BorderDirectional(
+                        bottom: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                    child: const CountryCodePicker(
+                      initialSelection: 'ID',
+                      textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: TextSize.large,
+                        color: Colors.black,
+                      ),
+                      closeIcon: Icon(Icons.close),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    height: 55,
+                    decoration: const BoxDecoration(
+                      border: BorderDirectional(
+                        bottom: BorderSide(color: Colors.black),
+                      ),
+                    ),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'Phone Number',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 5),
+                      ),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: TextSize.large,
+                      ),
+                      keyboardType: TextInputType.phone,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(
+          right: 10,
+          left: 10,
+          bottom: 10,
         ),
-      ]),
+        child: Button(
+          label: 'Continue',
+          bgColor: const Color(0xFF4749A0),
+          textColor: Colors.white,
+          onPressed: () {},
+        ),
+      ),
     );
   }
 }
