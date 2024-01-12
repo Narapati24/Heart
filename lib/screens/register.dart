@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:heart/screens/phone_number.dart';
 import 'package:heart/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
+import 'package:heart/components/button.dart';
+import 'package:heart/components/input_field.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -17,6 +20,7 @@ class _RegisterState extends State<Register> {
   TextEditingController _lastNameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _passwordConfirmController = TextEditingController();
 
   @override
   void dispose() {
@@ -24,6 +28,7 @@ class _RegisterState extends State<Register> {
     _lastNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _passwordConfirmController.dispose();
     super.dispose();
   }
 
@@ -32,162 +37,129 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       body: ListView(
         children: [
-          ListTile(
-            title: Text(
-              "Create your Account",
+          sectionTitle(),
+          const Image(
+            image: AssetImage("assets/images/Illustration-register.png"),
+          ),
+          sectionForm(context)
+        ],
+      ),
+    );
+  }
+
+  Form sectionForm(BuildContext context) {
+    return Form(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Fullname",
               style:
                   GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 18)),
             ),
-            subtitle: Text(
-              "Create an account to start your journey",
-              style:
-                  GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 12)),
-            ),
-          ),
-          const Image(
-              image: AssetImage("assets/images/Illustration-register.png")),
-          Form(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            const SizedBox(height: 10),
+            Row(
               children: [
-                Text(
-                  "Fullname",
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(fontSize: 18)),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 40,
-                        child: TextFormField(
-                          controller: _firstNameController,
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(fontSize: 18)),
-                          textAlignVertical: TextAlignVertical.bottom,
-                          decoration: InputDecoration(
-                              hintText: "First Name",
-                              border: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color.fromRGBO(221, 229, 233, 1)),
-                                  borderRadius: BorderRadius.circular(8))),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    Expanded(
-                      child: SizedBox(
-                        height: 40,
-                        child: TextFormField(
-                          controller: _lastNameController,
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(fontSize: 18)),
-                          textAlignVertical: TextAlignVertical.bottom,
-                          decoration: InputDecoration(
-                              hintText: "Last Name",
-                              border: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color.fromRGBO(221, 229, 233, 1)),
-                                  borderRadius: BorderRadius.circular(8))),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  "Email",
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(fontSize: 18)),
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  height: 40,
-                  child: TextFormField(
-                    controller: _emailController,
-                    style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(fontSize: 18)),
-                    textAlignVertical: TextAlignVertical.bottom,
-                    decoration: InputDecoration(
-                        hintText: "Enter your email",
-                        border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Color.fromRGBO(221, 229, 233, 1)),
-                            borderRadius: BorderRadius.circular(8))),
+                Expanded(
+                  child: InputField(
+                    placeholder: 'First Name',
+                    controller: _firstNameController,
                   ),
                 ),
-                const SizedBox(height: 20),
-                Text(
-                  "Password",
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(fontSize: 18)),
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  height: 40,
-                  child: TextFormField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(fontSize: 18)),
-                    textAlignVertical: TextAlignVertical.bottom,
-                    decoration: InputDecoration(
-                        hintText: "Enter your password",
-                        border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Color.fromRGBO(221, 229, 233, 1)),
-                            borderRadius: BorderRadius.circular(8))),
+                const SizedBox(width: 20),
+                Expanded(
+                  child: InputField(
+                    placeholder: 'Last Name',
+                    controller: _lastNameController,
                   ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 55,
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                            const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)))),
-                        backgroundColor: const MaterialStatePropertyAll(
-                            Color.fromRGBO(71, 73, 160, 1)),
-                      ),
-                      onPressed: _register,
-                      child: const Text(
-                        "Sign Up",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      )),
-                ),
-                const SizedBox(height: 30),
-                SizedBox(
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Already have an account?",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("Login"))
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
                 )
               ],
             ),
-          ))
+            const SizedBox(height: 20),
+            InputField(
+              label: 'Email',
+              placeholder: 'Enter your Email',
+              validator: (value) {
+                return;
+              },
+              controller: _emailController,
+            ),
+            const SizedBox(height: 20),
+            InputField(
+              label: 'Password',
+              placeholder: 'Enter your Password',
+              obscure: true,
+              validator: (value) {
+                return;
+              },
+              controller: _passwordController,
+            ),
+            const SizedBox(height: 20),
+            InputField(
+              label: 'Confirm Password',
+              placeholder: 'Enter your Confirm Password',
+              obscure: true,
+              validator: (value) {
+                return;
+              },
+              controller: _passwordConfirmController,
+            ),
+            const SizedBox(height: 20),
+            Button(
+                label: 'Sign Up',
+                bgColor: const Color(0xFF4749A0),
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PhoneNumber(),
+                    ),
+                  );
+                }),
+            const SizedBox(height: 30),
+            toLogin(context),
+            const SizedBox(
+              height: 20,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  SizedBox toLogin(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Already have an account?",
+            style: TextStyle(fontSize: 12),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text("Login"),
+          )
         ],
+      ),
+    );
+  }
+
+  ListTile sectionTitle() {
+    return ListTile(
+      title: Text(
+        "Create your Account",
+        style: GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 18)),
+      ),
+      subtitle: Text(
+        "Create an account to start your journey",
+        style: GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 12)),
       ),
     );
   }
@@ -197,6 +169,11 @@ class _RegisterState extends State<Register> {
     String lastName = _lastNameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
+    String passwordConfirm = _passwordConfirmController.text;
+
+    if (password != passwordConfirm) {
+      return;
+    }
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
