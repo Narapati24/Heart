@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:heart/screens/phone_number.dart';
+import 'package:heart/screens/home.dart';
 // import 'package:heart/screens/login.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class HeartApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PhoneNumber(),
+      home: HomeScreen(),
     );
   }
 }

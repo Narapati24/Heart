@@ -15,9 +15,7 @@ class Login extends StatelessWidget {
       body: ListView(
         children: [
           sectionTitle(),
-          const Image(
-            image: AssetImage("assets/images/Illustration-login.png"),
-          ),
+          Image.asset("assets/images/Illustration-login.png"),
           sectionForm(context)
         ],
       ),
