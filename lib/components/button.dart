@@ -9,8 +9,8 @@ class Button extends StatelessWidget {
   Button(
       {super.key,
       required this.label,
-      this.textColor,
-      this.bgColor,
+      this.textColor = Colors.white,
+      this.bgColor = const Color(0xFF4749A0),
       this.sizeHeight = 0,
       this.sizeWidth = 0,
       this.fs = 0,
