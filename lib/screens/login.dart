@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:heart/components/button.dart';
 import 'package:heart/components/input_field.dart';
 import 'package:heart/screens/register.dart';
-import 'package:heart/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
+import 'package:heart/services/auth.dart';
 import 'package:heart/variable/const.dart';
 
 class Login extends StatefulWidget {

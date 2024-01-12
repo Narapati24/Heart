@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heart/screens/phone_number.dart';
-import 'package:heart/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
+import 'package:heart/services/auth.dart';
 import 'package:heart/components/button.dart';
 import 'package:heart/components/input_field.dart';
 
@@ -112,12 +112,7 @@ class _RegisterState extends State<Register> {
                 bgColor: const Color(0xFF4749A0),
                 textColor: Colors.white,
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PhoneNumber(),
-                    ),
-                  );
+                  _register();
                 }),
             const SizedBox(height: 30),
             toLogin(context),
@@ -167,15 +162,18 @@ class _RegisterState extends State<Register> {
   void _register() async {
     String firstName = _firstNameController.text;
     String lastName = _lastNameController.text;
+    String fullName = firstName + ' ' + lastName;
     String email = _emailController.text;
     String password = _passwordController.text;
     String passwordConfirm = _passwordConfirmController.text;
 
     if (password != passwordConfirm) {
+      print("Password not same");
       return;
     }
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    User? user =
+        await _auth.signUpWithEmailAndPassword(email, password, fullName);
 
     if (user != null) {
       print("User is successfully created");
