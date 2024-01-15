@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heart/components/button.dart';
 import 'package:heart/components/input_field.dart';
+import 'package:heart/screens/home.dart';
 import 'package:heart/screens/register.dart';
 import 'package:heart/variable/const.dart';
 
@@ -52,12 +53,21 @@ class Login extends StatelessWidget {
               label: 'Login',
               bgColor: const Color(0xFF4749A0),
               textColor: Colors.white,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const HomeScreen();
+                    },
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 20),
             Button(
               label: 'Login with Google',
               bgColor: Colors.white,
+              // textColor: Colors.black,
               onPressed: () {},
             ),
             const SizedBox(height: 30),

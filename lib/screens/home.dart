@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heart/screens/relationship.dart';
 import 'package:heart/variable/const.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: uiHome(),
+      body: uiHome(context),
       bottomNavigationBar: navbar(),
     );
   }
@@ -115,50 +116,57 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  ListView uiHome() {
+  ListView uiHome(context) {
     return ListView(
       children: [
         greeting(),
         appointment(),
         const Divider(
-          thickness: 10,
+          thickness: 5,
           color: Colors.black12,
         ),
-        problem(),
+        problem(context),
         const Divider(
-          thickness: 10,
+          thickness: 5,
           color: Colors.black12,
         ),
-        topTherapist(),
+        topTherapist(context),
       ],
     );
   }
 
-  Padding topTherapist() {
+  Padding topTherapist(context) {
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.symmetric(
+        vertical: 15,
+      ),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Top Therapist',
-                style: TextStyle(
-                  fontSize: TextSize.extraLarge,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'See all',
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Top Therapist',
                   style: TextStyle(
-                    color: Colors.black38,
+                    fontSize: TextSize.extraLarge,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            ],
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'See all',
+                    style: TextStyle(
+                      color: Colors.black38,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 150,
@@ -167,58 +175,60 @@ class HomeScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: 4,
               itemBuilder: (context, index) {
-                return Card(
-                  elevation: 0,
-                  color: const Color(0xFFF9CFD4),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      children: [
-                        Container(
-                          // margin: const EdgeInsets.symmetric(vertical: 15),
-                          width: 100,
-                          height: 100,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  'https://placeholder.com/100x100'),
-                            ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Dr. Abdullah Pasha',
-                              style: TextStyle(
-                                fontSize: TextSize.extraLarge,
-                                fontWeight: FontWeight.bold,
+                return Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                  ),
+                  child: Card(
+                    elevation: 0,
+                    color: const Color(0xFFF9CFD4),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Row(
+                        children: [
+                          Container(
+                            // margin: const EdgeInsets.symmetric(vertical: 15),
+                            width: 100,
+                            height: 100,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    'https://placeholder.com/100x100'),
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
                               ),
                             ),
-                            Text('Broken Home Specialist'),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                Image(
-                                  image:
-                                      AssetImage('assets/images/icon/star.png'),
+                          ),
+                          const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Dr. Abdullah Pasha',
+                                style: TextStyle(
+                                  fontSize: TextSize.extraLarge,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                SizedBox(width: 5),
-                                Text('4.8'),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                              ),
+                              Text('Broken Home Specialist'),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Image(
+                                    image: AssetImage(
+                                        'assets/images/icon/star.png'),
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text('4.8'),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -230,7 +240,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Padding problem() {
+  Padding problem(context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Column(
@@ -296,7 +306,15 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Relationship();
+                          },
+                        ),
+                      );
+                    },
                     child: const Image(
                       image: AssetImage('assets/images/icon/relationship.png'),
                     ),
@@ -375,7 +393,7 @@ class HomeScreen extends StatelessWidget {
   Container greeting() {
     return Container(
       color: Colors.black12,
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 5),
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.white,

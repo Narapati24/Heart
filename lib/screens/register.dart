@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heart/components/button.dart';
 import 'package:heart/components/input_field.dart';
+import 'package:heart/screens/phone_number.dart';
 
 class Register extends StatelessWidget {
   const Register({super.key});
@@ -80,7 +81,15 @@ class Register extends StatelessWidget {
               label: 'Sign Up',
               bgColor: const Color(0xFF4749A0),
               textColor: Colors.white,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const PhoneNumber();
+                    },
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 30),
             toLogin(context),
