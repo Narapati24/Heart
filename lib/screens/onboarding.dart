@@ -1,16 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
-import 'package:heart/screens/onboarding.dart';
 
-void main() {
-  runApp(const HeartApp());
-}
-
-class HeartApp extends StatelessWidget {
-  const HeartApp({super.key});
+class OnBoarding extends StatelessWidget {
+  const OnBoarding({super.key});
 
   @override
   Widget build(BuildContext context) {
