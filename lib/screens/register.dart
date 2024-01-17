@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heart/screens/phone_number.dart';
+import 'package:heart/screens/verification_code.dart';
 import 'package:heart/services/auth.dart';
 import 'package:heart/components/button.dart';
 import 'package:heart/components/input_field.dart';
+import 'package:heart/screens/phone_number.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -177,7 +179,6 @@ class _RegisterState extends State<Register> {
 
     if (user != null) {
       print("User is successfully created");
-      Navigator.of(context).pop();
     } else {
       print("Some error happend");
     }

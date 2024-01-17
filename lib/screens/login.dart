@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heart/components/button.dart';
 import 'package:heart/components/input_field.dart';
+import 'package:heart/screens/home.dart';
 import 'package:heart/screens/register.dart';
 import 'package:heart/services/auth.dart';
 import 'package:heart/variable/const.dart';
@@ -35,9 +36,7 @@ class _LoginState extends State<Login> {
       body: ListView(
         children: [
           sectionTitle(),
-          const Image(
-            image: AssetImage("assets/images/Illustration-login.png"),
-          ),
+          Image.asset("assets/images/Illustration-login.png"),
           sectionForm(context)
         ],
       ),
@@ -82,6 +81,7 @@ class _LoginState extends State<Login> {
             Button(
               label: 'Login with Google',
               bgColor: Colors.white,
+              // textColor: Colors.black,
               onPressed: () {},
             ),
             const SizedBox(height: 30),
@@ -147,6 +147,13 @@ class _LoginState extends State<Login> {
 
     if (user != null) {
       print("User is successfully login");
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) {
+            return const HomeScreen();
+          },
+        ),
+      );
     } else {
       print("Some error happend");
     }

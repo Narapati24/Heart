@@ -6,6 +6,11 @@ import 'package:heart/screens/login.dart';
 import 'package:heart/screens/phone_number.dart';
 // import 'package:heart/screens/login.dart';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
+import 'package:heart/screens/onboarding.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -22,9 +27,34 @@ class HeartApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Login(),
+    return CupertinoApp(
+      home: OnBoardingSlider(
+        totalPage: 3,
+        headerBackgroundColor: Colors.white,
+        background: [
+          Image.asset('assets/images/Illustration-slide1.png'),
+          Image.asset('assets/images/Illustration-slide2.png'),
+          Image.asset('assets/images/Illustration-slide3.png'),
+        ],
+        speed: 2,
+        pageBodies: [
+          Container(
+            alignment: Alignment.bottomCenter,
+            height: 200,
+            child: const Text('data'),
+          ),
+          Container(
+            alignment: Alignment.bottomCenter,
+            height: 200,
+            child: const Text('data'),
+          ),
+          Container(
+            alignment: Alignment.bottomCenter,
+            height: 200,
+            child: const Text('data'),
+          ),
+        ],
+      ),
     );
   }
 }

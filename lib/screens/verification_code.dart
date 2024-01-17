@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:heart/components/button.dart';
+import 'package:heart/screens/login.dart';
 
 class VerifCode extends StatelessWidget {
   const VerifCode({super.key});
@@ -26,6 +27,7 @@ class VerifCode extends StatelessWidget {
               VerificationCode(
                 onCompleted: (value) {},
                 onEditing: (value) {},
+                margin: const EdgeInsets.symmetric(horizontal: 16),
               ),
             ],
           ),
@@ -47,7 +49,13 @@ class VerifCode extends StatelessWidget {
                   label: 'Continue',
                   bgColor: const Color(0xFF4749A0),
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) {
+                        return const Login();
+                      }),
+                    );
+                  },
                 ),
               ],
             ),

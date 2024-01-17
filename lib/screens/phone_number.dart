@@ -92,13 +92,17 @@ class _PhoneNumberState extends State<PhoneNumber> {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Button(
-                    label: 'Continue',
-                    bgColor: const Color(0xFF4749A0),
-                    textColor: Colors.white,
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => VerifCode()));
-                    }),
+                  label: 'Continue',
+                  bgColor: const Color(0xFF4749A0),
+                  textColor: Colors.white,
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) {
+                        return const VerifCode();
+                      }),
+                    );
+                  },
+                ),
               ),
             ],
           ),
