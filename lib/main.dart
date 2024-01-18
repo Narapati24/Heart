@@ -27,34 +27,6 @@ class HeartApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      home: OnBoardingSlider(
-        totalPage: 3,
-        headerBackgroundColor: Colors.white,
-        background: [
-          Image.asset('assets/images/Illustration-slide1.png'),
-          Image.asset('assets/images/Illustration-slide2.png'),
-          Image.asset('assets/images/Illustration-slide3.png'),
-        ],
-        speed: 2,
-        pageBodies: [
-          Container(
-            alignment: Alignment.bottomCenter,
-            height: 200,
-            child: const Text('data'),
-          ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            height: 200,
-            child: const Text('data'),
-          ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            height: 200,
-            child: const Text('data'),
-          ),
-        ],
-      ),
-    );
+    return MaterialApp(home: Login());
   }
 }

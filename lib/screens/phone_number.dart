@@ -6,7 +6,9 @@ import 'package:heart/screens/verification_code.dart';
 import 'package:heart/variable/const.dart';
 
 class PhoneNumber extends StatefulWidget {
-  const PhoneNumber({super.key});
+  String? email, password, fullname;
+  PhoneNumber({super.key});
+  PhoneNumber.signUp({super.key, this.email, this.password, this.fullname});
 
   @override
   State<PhoneNumber> createState() => _PhoneNumberState();
