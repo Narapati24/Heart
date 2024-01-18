@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heart/screens/consult_later.dart';
 import 'package:heart/variable/const.dart';
 
 class Relationship extends StatelessWidget {
@@ -196,7 +197,15 @@ class Relationship extends StatelessWidget {
                                             height: 15,
                                           ),
                                           GestureDetector(
-                                            onTap: () {},
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) {
+                                                    return const ConsultLater();
+                                                  },
+                                                ),
+                                              );
+                                            },
                                             child: const Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
